@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading;
-
 namespace HuyNgu
 {
     public class Student
@@ -27,7 +27,6 @@ namespace HuyNgu
         float chose;
         static LinkedList<Student> students = new LinkedList<Student>();
 
-
         public void DisplayStudents()
         {
             Console.WriteLine("Student list:");
@@ -41,8 +40,26 @@ namespace HuyNgu
 
         public void DeleteStudent()
         {
-            Console.Write("Enter the student's ID to delete: ");
-            int id = Convert.ToInt32(Console.ReadLine());
+            Console.Clear();
+            Console.SetCursorPosition(0, 7);
+            Console.WriteLine("                          ██████╗ ███████╗██╗     ███████╗██╗  ████████╗███████╗");
+            Console.WriteLine("                          ██╔══██╗██╔════╝██║     ██╔════╝██║  ╚══██╔══╝██╔════╝");
+            Console.WriteLine("                          ██║  ██║█████╗  ██║     █████╗  ██║     ██║   █████╗  ");
+            Console.WriteLine("                          ██║  ██║██╔══╝  ██║     ██╔══╝  ██║     ██║   ██╔══╝  ");
+            Console.WriteLine("                          ██████╔╝███████╗███████╗███████╗███████╗██║   ███████╗");
+            Console.WriteLine("                          ╚═════╝ ╚══════╝╚══════╝╚══════╝╚══════╝╚═╝   ╚══════╝");
+            Console.SetCursorPosition(0, 14);
+            Console.WriteLine("                 ╔══════════════════════════════════════════════════════════════════════╗");
+            Console.WriteLine("                 ║ Enter the student's ID to correct:                                   ║");
+            Console.WriteLine("                 ╚══════════════════════════════════════════════════════════════════════╝");
+            try
+            {
+                id = float.Parse(Console.ReadLine());
+            }
+            catch
+            {
+                ErrorEndWithTimeout("Invalid information", 26, 6, 1500);
+            }
 
             LinkedListNode<Student> currentNode = students.First;
             while (currentNode != null)
@@ -69,14 +86,29 @@ namespace HuyNgu
         float mediumScore;
         public void AddStudent()
         {
-            Program program = new Program();
             bool done = true;
 
             do
             {
                 Console.Clear();
-                Console.WriteLine("ID: ");
-                Console.SetCursorPosition(3, 0);
+                Console.SetCursorPosition(0, 5);
+                Console.WriteLine("                █████╗ ██████╗ ██████╗     ███████╗████████╗██╗   ██╗██████╗ ███████╗███╗   ██╗████████╗");
+                Console.WriteLine("               ██╔══██╗██╔══██╗██╔══██╗    ██╔════╝╚══██╔══╝██║   ██║██╔══██╗██╔════╝████╗  ██║╚══██╔══╝");
+                Console.WriteLine("               ███████║██║  ██║██║  ██║    ███████╗   ██║   ██║   ██║██║  ██║█████╗  ██╔██╗ ██║   ██║  ");
+                Console.WriteLine("               ██╔══██║██║  ██║██║  ██║    ╚════██║   ██║   ██║   ██║██║  ██║██╔══╝  ██║╚██╗██║   ██║   ");
+                Console.WriteLine("               ██║  ██║██████╔╝██████╔╝    ███████║   ██║   ╚██████╔╝██████╔╝███████╗██║ ╚████║   ██║  ");
+                Console.WriteLine("               ╚═╝  ╚═╝╚═════╝ ╚═════╝     ╚══════╝   ╚═╝    ╚═════╝ ╚═════╝ ╚══════╝╚═╝  ╚═══╝   ╚═╝   ");
+                Console.SetCursorPosition(0, 14);
+                Console.WriteLine("                                           ╔══════════════════════════════════╗");
+                Console.WriteLine("                                           ║ ID:                              ║");
+                Console.WriteLine("                                           ╠══════════════════════════════════╣");
+                Console.WriteLine("                                           ║ NAME:                            ║");
+                Console.WriteLine("                                           ╠══════════════════════════════════╣");
+                Console.WriteLine("                                           ║ PRACTICESORE:                    ║");
+                Console.WriteLine("                                           ╠══════════════════════════════════╣");
+                Console.WriteLine("                                           ║ THEORETICALSCORE:                ║");
+                Console.WriteLine("                                           ╚══════════════════════════════════╝");
+                Console.SetCursorPosition(51, 15);
                 try
                 {
                     id = float.Parse(Console.ReadLine());
@@ -87,10 +119,10 @@ namespace HuyNgu
                     AddStudent();
                 }
 
-                Console.WriteLine("Name: ");
+                Console.SetCursorPosition(53, 17);
                 name = Console.ReadLine() ?? "";
 
-                Console.WriteLine("PracticeScore: ");
+                Console.SetCursorPosition(61, 19);
                 try
                 {
                     practiceScore = float.Parse(Console.ReadLine());
@@ -101,7 +133,7 @@ namespace HuyNgu
                     AddStudent();
                 }
 
-                Console.WriteLine("TheoreticalScore: ");
+                Console.SetCursorPosition(65, 21);
                 try
                 {
                     theoreticalScore = float.Parse(Console.ReadLine());
@@ -124,7 +156,7 @@ namespace HuyNgu
                     AddStudent();
                 }
             } while (done);
-            program.MainMenu();
+            MainMenu();
         }
 
         public float GPA(float practiceScore, float theoreticalScore)
@@ -134,110 +166,180 @@ namespace HuyNgu
         private void EditStudent()
         {
             bool done = false;
-            Console.Write("Enter the student's ID to correct: ");
-            int id = Convert.ToInt32(Console.ReadLine());
-
-            LinkedListNode<Student> currentNode = students.First;
-            while (currentNode != null)
+            do
             {
-                if (currentNode.Value._id == id)
+                Console.Clear();
+                Console.SetCursorPosition(0, 7);
+                Console.WriteLine("                            ███████╗██████╗ ██╗████████╗██╗███╗   ██╗ ██████╗ ");
+                Console.WriteLine("                            ██╔════╝██╔══██╗██║╚══██╔══╝██║████╗  ██║██╔════╝ ");
+                Console.WriteLine("                            █████╗  ██║  ██║██║   ██║   ██║██╔██╗ ██║██║  ███╗");
+                Console.WriteLine("                            ██╔══╝  ██║  ██║██║   ██║   ██║██║╚██╗██║██║   ██║");
+                Console.WriteLine("                            ███████╗██████╔╝██║   ██║   ██║██║ ╚████║╚██████╔╝");
+                Console.WriteLine("                            ╚══════╝╚═════╝ ╚═╝   ╚═╝   ╚═╝╚═╝  ╚═══╝ ╚═════╝ ");
+                Console.SetCursorPosition(0, 14);
+                Console.WriteLine("                 ╔══════════════════════════════════════════════════════════════════════╗");
+                Console.WriteLine("                 ║ Enter the student's ID to correct:                                   ║");
+                Console.WriteLine("                 ╚══════════════════════════════════════════════════════════════════════╝");
+                Console.SetCursorPosition(54, 15);
+                try
                 {
-                    do
-                    {
-
-                        Console.Write("New name: ");
-                        name = Console.ReadLine() ?? "";
-
-
-                        Console.Write("New practiceScore: ");
-                        try
-                        {
-                            practiceScore = float.Parse(Console.ReadLine());
-                        }
-                        catch
-                        {
-                            ErrorEndWithTimeout("New invalid information", 26, 6, 1500);
-                            EditStudent();
-                        }
-
-                        Console.Write("New theoreticalScore: ");
-                        try
-                        {
-                            theoreticalScore = float.Parse(Console.ReadLine());
-                        }
-                        catch
-                        {
-                            ErrorEndWithTimeout("Invalid information", 26, 6, 1500);
-                            EditStudent();
-                        }
-
-                        if (practiceScore >= 0 && theoreticalScore >= 0 && theoreticalScore <= 10 && practiceScore <= 10)
-                        {
-                            mediumScore = GPA(practiceScore, theoreticalScore);
-                            done = true;
-                        }
-                        else
-                        {
-                            ErrorEndWithTimeout("Invalid information", 26, 6, 1500);
-                        }
-                    } while (!done);
-                    currentNode.Value._name = name;
-                    currentNode.Value._practiceScore = practiceScore;
-                    currentNode.Value._theoreticalScore = theoreticalScore;
-                    currentNode.Value._mediumScore = mediumScore;
-
-                    Console.WriteLine("Successful student information has been repaired.");
-                    return;
+                     id = float.Parse(Console.ReadLine());
                 }
-                else
+                catch
                 {
                     ErrorEndWithTimeout("Invalid information", 26, 6, 1500);
                 }
-                currentNode = currentNode.Next;
-            }
+                Console.SetCursorPosition(0, 18);
+                Console.WriteLine("                                  ╔══════════════════════════════════╗");
+                Console.WriteLine("                                  ║ NEW NAME:                        ║");
+                Console.WriteLine("                                  ╠══════════════════════════════════╣");
+                Console.WriteLine("                                  ║ NEW PRACTICESORE:                ║");
+                Console.WriteLine("                                  ╠══════════════════════════════════╣");
+                Console.WriteLine("                                  ║ NEW THEORETICALSCORE:            ║");
+                Console.WriteLine("                                  ╚══════════════════════════════════╝");
+                LinkedListNode<Student> currentNode = students.First;
+                while (currentNode != null)
+                {
+                    if (currentNode.Value._id == id)
+                    {
+                        do
+                        {
+                            Console.SetCursorPosition(46, 19);
+                            name = Console.ReadLine() ?? "";
 
-            Console.WriteLine("Can't find students with ID imported.");
+
+                            Console.SetCursorPosition(54, 21);
+                            try
+                            {
+                                practiceScore = float.Parse(Console.ReadLine());
+                            }
+                            catch
+                            {
+                                ErrorEndWithTimeout(" Invalid information", 26, 6, 1500);
+                                EditStudent();
+                            }
+
+                            Console.SetCursorPosition(58, 23);
+                            try
+                            {
+                                theoreticalScore = float.Parse(Console.ReadLine());
+                            }
+                            catch
+                            {
+                                ErrorEndWithTimeout("Invalid information", 26, 6, 1500);
+                                EditStudent();
+                            }
+
+                            if (practiceScore >= 0 && theoreticalScore >= 0 && theoreticalScore <= 10 && practiceScore <= 10)
+                            {
+                                mediumScore = GPA(practiceScore, theoreticalScore);
+                                done = true;
+                            }
+                            else
+                            {
+                                ErrorEndWithTimeout("Invalid information", 26, 6, 1500);
+                            }
+                        } while (!done);
+                        currentNode.Value._name = name;
+                        currentNode.Value._practiceScore = practiceScore;
+                        currentNode.Value._theoreticalScore = theoreticalScore;
+                        currentNode.Value._mediumScore = mediumScore;
+
+                        Console.WriteLine("Successful student information has been repaired.");
+                        return;
+                    }
+                    else
+                    {
+                        ErrorEndWithTimeout("Invalid information", 26, 6, 1500);
+                    }
+                    currentNode = currentNode.Next;
+                }
+
+                Console.WriteLine("Can't find students with ID imported.");
+            } while (!done);
         }
 
         public void Processing()
         {
             bool done = false;
+            float count = 1;
             do
             {
+                count++;
                 Console.Clear();
+                Console.SetCursorPosition(0, 7);
+                Console.WriteLine("                            ██████╗ ██████╗  ██████╗  ██████╗ ██████╗  █████╗ ███╗   ███╗");
+                Console.WriteLine("                            ██╔══██╗██╔══██╗██╔═══██╗██╔════╝ ██╔══██╗██╔══██╗████╗ ████║");
+                Console.WriteLine("                            ██████╔╝██████╔╝██║   ██║██║  ███╗██████╔╝███████║██╔████╔██║");
+                Console.WriteLine("                            ██╔═══╝ ██╔══██╗██║   ██║██║   ██║██╔══██╗██╔══██║██║╚██╔╝██║");
+                Console.WriteLine("                            ██║     ██║  ██║╚██████╔╝╚██████╔╝██║  ██║██║  ██║██║ ╚═╝ ██║");
+                Console.WriteLine("                            ╚═╝     ╚═╝  ╚═╝ ╚═════╝  ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝     ╚═╝");
+                Console.SetCursorPosition(0, 11);
+                Console.WriteLine("                    ╔══════════════════════════════════════════════════════════════════════════════════╗");
+                Console.WriteLine("                    ║                                                                                  ║");
+                Console.WriteLine("                    ╚══════════════════════════════════════════════════════════════════════════════════╝");
+                Console.SetCursorPosition(21, 12);
+                for (int i = 0; i <= count; i++)
+                {
+                    Console.Write("█");
+                }
+                if (count >= 81) done = true;
+                Thread.Sleep(50);
             } while (!done);
         }
 
         public void MainMenu()
         {
-            Program program = new Program();
+            // Program program = new Program();
+
+            // Processing();
+
             Console.Clear();
-            Console.WriteLine("1.add");
-            Console.WriteLine("2.edit");
-            Console.WriteLine("3.delete");
-            Console.WriteLine("4.show");
+            Console.SetCursorPosition(0, 7);
+            Console.WriteLine("               ███╗   ███╗ █████╗ ███╗   ██╗ █████╗  ██████╗ ███████╗███╗   ███╗███████╗███╗   ██╗████████╗  ");
+            Console.WriteLine("               ████╗ ████║██╔══██╗████╗  ██║██╔══██╗██╔════╝ ██╔════╝████╗ ████║██╔════╝████╗  ██║╚══██╔══╝  ");
+            Console.WriteLine("               ██╔████╔██║███████║██╔██╗ ██║███████║██║  ███╗█████╗  ██╔████╔██║█████╗  ██╔██╗ ██║   ██║     ");
+            Console.WriteLine("               ██║╚██╔╝██║██╔══██║██║╚██╗██║██╔══██║██║   ██║██╔══╝  ██║╚██╔╝██║██╔══╝  ██║╚██╗██║   ██║     ");
+            Console.WriteLine("               ██║ ╚═╝ ██║██║  ██║██║ ╚████║██║  ██║╚██████╔╝███████╗██║ ╚═╝ ██║███████╗██║ ╚████║   ██║     ");
+            Console.WriteLine("               ╚═╝     ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝╚═╝     ╚═╝╚══════╝╚═╝  ╚═══╝   ╚═╝     ");
+            Console.SetCursorPosition(0, 14);
+            Console.WriteLine("                                       ╔══════════════════════════════════╗");
+            Console.WriteLine("                                       ║ 1. ADD STUDENT                   ║");
+            Console.WriteLine("                                       ╠══════════════════════════════════╣");
+            Console.WriteLine("                                       ║ 2. STUDENT INFORMATION EDITING   ║");
+            Console.WriteLine("                                       ╠══════════════════════════════════╣");
+            Console.WriteLine("                                       ║ 3. DELETE STUDENT INFORMATION    ║");
+            Console.WriteLine("                                       ╠══════════════════════════════════╣");
+            Console.WriteLine("                                       ║ 4. DISPLAY STUDENTS INFORMATION  ║");
+            Console.WriteLine("                                       ╚══════════════════════════════════╝");
+            Console.WriteLine("                                       ╔══════════════════════════════════╗");
+            Console.WriteLine("                                       ║ YOU CHOOSE:                      ║");
+            Console.WriteLine("                                       ╚══════════════════════════════════╝");
+            Console.SetCursorPosition(52, 24);
             try
             {
                 chose = float.Parse(Console.ReadLine());
             }
             catch
             {
-                ErrorEndWithTimeout("Invalid information", 26, 6, 1500);
-                MainMenu();
+                ErrorEndWithTimeout("Invalid information", 44, 26, 1500);
             }
             switch (chose)
             {
                 case 1:
-                    program.AddStudent();
+                    AddStudent();
                     break;
                 case 2:
-                    program.EditStudent();
+                    if (students.Count > 0) EditStudent();
+                    else ErrorEndWithTimeout("No students in the list", 44, 26, 1500);
                     break;
                 case 3:
-                    program.DeleteStudent();
+                    if (students.Count > 0) DeleteStudent();
+                    else ErrorEndWithTimeout("No students in the list", 44, 26, 1500);
                     break;
                 case 4:
-                    program.DisplayStudents();
+                    if (students.Count > 0) DisplayStudents();
+                    else ErrorEndWithTimeout("No students in the list", 44, 26, 1500);
                     break;
             }
         }
@@ -259,7 +361,6 @@ namespace HuyNgu
         public static void Main()
         {
             Program program = new Program();
-
             do
             {
                 program.MainMenu();
