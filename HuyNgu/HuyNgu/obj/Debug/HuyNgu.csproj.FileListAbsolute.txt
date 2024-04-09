@@ -1,0 +1,7 @@
+D:\VTCAcademy\Temp\HuyNgu\HuyNgu\bin\Debug\HuyNgu.exe.config
+D:\VTCAcademy\Temp\HuyNgu\HuyNgu\bin\Debug\HuyNgu.exe
+D:\VTCAcademy\Temp\HuyNgu\HuyNgu\bin\Debug\HuyNgu.pdb
+D:\VTCAcademy\Temp\HuyNgu\HuyNgu\obj\Debug\HuyNgu.csproj.AssemblyReference.cache
+D:\VTCAcademy\Temp\HuyNgu\HuyNgu\obj\Debug\HuyNgu.csproj.CoreCompileInputs.cache
+D:\VTCAcademy\Temp\HuyNgu\HuyNgu\obj\Debug\HuyNgu.exe
+D:\VTCAcademy\Temp\HuyNgu\HuyNgu\obj\Debug\HuyNgu.pdb
