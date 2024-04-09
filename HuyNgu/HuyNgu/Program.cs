@@ -216,7 +216,6 @@ namespace HuyNgu
             Console.WriteLine("2.edit");
             Console.WriteLine("3.delete");
             Console.WriteLine("4.show");
-            Console.WriteLine("numstudent: " + students.Count);
             try
             {
                 chose = float.Parse(Console.ReadLine());
