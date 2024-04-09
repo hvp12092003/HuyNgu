@@ -1,9 +1,7 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace HuyNgu
 {
@@ -15,108 +13,117 @@ namespace HuyNgu
         public float _practiceScore { get; set; }
         public float _mediumScore { get; set; }
 
+        public Student(float id, string name, float theoreticalScore, float practiceScore, float mediumScore)
+        {
+            _id = id;
+            _name = name;
+            _theoreticalScore = theoreticalScore;
+            _practiceScore = practiceScore;
+            _mediumScore = mediumScore;
+        }
     }
     public class Program
     {
         float chose;
-        List<Student> studentList = new List<Student>();
+        static LinkedList<Student> students = new LinkedList<Student>();
 
 
-        public void ShowStudentList(List<Student> studentList)
+        public void DisplayStudents()
         {
-            Console.Clear();
-            for (int i = 0; i < studentList.Count; i++)
+            Console.WriteLine("Student list:");
+            foreach (var student in students)
             {
-                Console.WriteLine("================= ");
-                Console.Write("ID: " + studentList[i]._id + " ");
-                Console.Write("Name: " + studentList[i]._name + " ");
-                Console.Write("practiceScore: " + studentList[i]._practiceScore + " ");
-                Console.Write("theoreticalScore: " + studentList[i]._theoreticalScore + " ");
-                Console.WriteLine("GPA: " + studentList[i]._mediumScore + " ");
+                Console.WriteLine($"ID: {student._id}, Name: {student._name}, TheoreticalScore: {student._theoreticalScore},PracticeScore: {student._practiceScore}, MediumScore: {student._mediumScore}");
             }
             Console.ReadKey();
         }
 
-        public void FindStudent(List<Student> studentList)
-        {
-            Console.Clear();
-            Console.Write("ID student wants to delete: ");
-            float id = float.Parse(Console.ReadLine());
 
-            studentList.Find(x => x._id == id);
+        public void DeleteStudent()
+        {
+            Console.Write("Enter the student's ID to delete: ");
+            int id = Convert.ToInt32(Console.ReadLine());
+
+            LinkedListNode<Student> currentNode = students.First;
+            while (currentNode != null)
+            {
+                if (currentNode.Value._id == id)
+                {
+                    students.Remove(currentNode);
+                    Console.WriteLine("Successful students have deleted.");
+                    return;
+                }
+                else
+                {
+                    ErrorEndWithTimeout("Invalid information", 26, 6, 1500);
+                }
+                currentNode = currentNode.Next;
+            }
+            Console.WriteLine("Can not find students with ID imported.");
         }
 
-        public void DeleteStudent(List<Student> studentList)
+        float id;
+        string name;
+        float practiceScore;
+        float theoreticalScore;
+        float mediumScore;
+        public void AddStudent()
         {
-            Console.Clear();
-        }
-
-        public void AddStudent(List<Student> studentList)
-        {
-            Student newStudent = new Student();
             Program program = new Program();
             bool done = true;
-            string id;
-            string name;
-            string practiceScore;
-            string theoreticalScore;
 
             do
             {
                 Console.Clear();
                 Console.WriteLine("ID: ");
                 Console.SetCursorPosition(3, 0);
-                id = Console.ReadLine() ?? "";
                 try
                 {
-                    newStudent._id = float.Parse(id);
+                    id = float.Parse(Console.ReadLine());
                 }
                 catch
                 {
                     ErrorEndWithTimeout("Invalid information", 26, 6, 1500);
-                    AddStudent(studentList);
+                    AddStudent();
                 }
 
                 Console.WriteLine("Name: ");
-                newStudent._name = Console.ReadLine() ?? "";
+                name = Console.ReadLine() ?? "";
 
-                Console.WriteLine("practiceScore: ");
-                practiceScore = Console.ReadLine() ?? "";
+                Console.WriteLine("PracticeScore: ");
                 try
                 {
-                    newStudent._practiceScore = float.Parse(practiceScore);
+                    practiceScore = float.Parse(Console.ReadLine());
                 }
                 catch
                 {
                     ErrorEndWithTimeout("Invalid information", 26, 6, 1500);
-                    AddStudent(studentList);
+                    AddStudent();
                 }
 
-                Console.WriteLine("theoreticalScore: ");
-                theoreticalScore = Console.ReadLine() ?? "";
+                Console.WriteLine("TheoreticalScore: ");
                 try
                 {
-                    newStudent._theoreticalScore = float.Parse(theoreticalScore);
+                    theoreticalScore = float.Parse(Console.ReadLine());
                 }
                 catch
                 {
                     ErrorEndWithTimeout("Invalid information", 26, 6, 1500);
-                    AddStudent(studentList);
+                    AddStudent();
                 }
-
-                if (newStudent._practiceScore >= 0 && newStudent._theoreticalScore >= 0 && newStudent._theoreticalScore <= 10 && newStudent._practiceScore <= 10)
+                if (practiceScore >= 0 && theoreticalScore >= 0 && theoreticalScore <= 10 && practiceScore <= 10)
                 {
-                    newStudent._mediumScore = GPA(newStudent._practiceScore, newStudent._theoreticalScore);
-                    studentList.Add(newStudent);
+                    mediumScore = GPA(practiceScore, theoreticalScore);
+                    Student newStudent = new Student(id, name, theoreticalScore, practiceScore, mediumScore);
+                    students.AddLast(newStudent);
                     done = false;
                 }
                 else
                 {
                     ErrorEndWithTimeout("Invalid information", 26, 6, 1500);
-                    AddStudent(studentList);
+                    AddStudent();
                 }
             } while (done);
-
             program.MainMenu();
         }
 
@@ -124,6 +131,83 @@ namespace HuyNgu
         {
             return (practiceScore + theoreticalScore) / 2;
         }
+        private void EditStudent()
+        {
+            bool done = false;
+            Console.Write("Enter the student's ID to correct: ");
+            int id = Convert.ToInt32(Console.ReadLine());
+
+            LinkedListNode<Student> currentNode = students.First;
+            while (currentNode != null)
+            {
+                if (currentNode.Value._id == id)
+                {
+                    do
+                    {
+
+                        Console.Write("New name: ");
+                        name = Console.ReadLine() ?? "";
+
+
+                        Console.Write("New practiceScore: ");
+                        try
+                        {
+                            practiceScore = float.Parse(Console.ReadLine());
+                        }
+                        catch
+                        {
+                            ErrorEndWithTimeout("New invalid information", 26, 6, 1500);
+                            EditStudent();
+                        }
+
+                        Console.Write("New theoreticalScore: ");
+                        try
+                        {
+                            theoreticalScore = float.Parse(Console.ReadLine());
+                        }
+                        catch
+                        {
+                            ErrorEndWithTimeout("Invalid information", 26, 6, 1500);
+                            EditStudent();
+                        }
+
+                        if (practiceScore >= 0 && theoreticalScore >= 0 && theoreticalScore <= 10 && practiceScore <= 10)
+                        {
+                            mediumScore = GPA(practiceScore, theoreticalScore);
+                            done = true;
+                        }
+                        else
+                        {
+                            ErrorEndWithTimeout("Invalid information", 26, 6, 1500);
+                        }
+                    } while (!done);
+                    currentNode.Value._name = name;
+                    currentNode.Value._practiceScore = practiceScore;
+                    currentNode.Value._theoreticalScore = theoreticalScore;
+                    currentNode.Value._mediumScore = mediumScore;
+
+                    Console.WriteLine("Successful student information has been repaired.");
+                    return;
+                }
+                else
+                {
+                    ErrorEndWithTimeout("Invalid information", 26, 6, 1500);
+                }
+                currentNode = currentNode.Next;
+            }
+
+            Console.WriteLine("Can't find students with ID imported.");
+        }
+
+        public void Processing()
+        {
+            bool done = false;
+            do
+            {
+                Console.Clear();
+            } while (!done);
+        }
+
         public void MainMenu()
         {
             Program program = new Program();
@@ -132,6 +216,7 @@ namespace HuyNgu
             Console.WriteLine("2.edit");
             Console.WriteLine("3.delete");
             Console.WriteLine("4.show");
+            Console.WriteLine("numstudent: " + students.Count);
             try
             {
                 chose = float.Parse(Console.ReadLine());
@@ -144,26 +229,19 @@ namespace HuyNgu
             switch (chose)
             {
                 case 1:
-                    program.AddStudent(studentList);
+                    program.AddStudent();
                     break;
                 case 2:
-                    program.EditStudent(studentList);
+                    program.EditStudent();
                     break;
                 case 3:
-                    program.DeleteStudent(studentList);
+                    program.DeleteStudent();
                     break;
                 case 4:
-                    program.ShowStudentList(studentList);
+                    program.DisplayStudents();
                     break;
             }
         }
-
-        private void EditStudent(List<Student> studentList)
-        {
-            Console.WriteLine("EditStudent");
-            Console.ReadKey();
-        }
-
         public void ErrorEndWithTimeout(string message, int left, int top, int timeout)
         {
             int count = message.Count() + 5;
@@ -179,16 +257,14 @@ namespace HuyNgu
             }
             Console.SetCursorPosition(left, top);
         }
-
-
         public static void Main()
         {
             Program program = new Program();
 
-            program.MainMenu();
-
-            Console.ReadLine();
-
+            do
+            {
+                program.MainMenu();
+            } while (true);
         }
     }
 }
