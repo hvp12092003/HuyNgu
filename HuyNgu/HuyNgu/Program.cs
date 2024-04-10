@@ -171,6 +171,28 @@ namespace HuyNgu
             MainMenu();
         }
 
+        public void ShowLowScore()
+        {
+            Console.Clear();
+            Console.SetCursorPosition(0, 5);
+            Console.WriteLine("           ██╗      ██████╗ ██╗    ██╗    ███████╗ ██████╗ ██████╗ ██████╗ ███████╗");
+            Console.WriteLine("           ██║     ██╔═══██╗██║    ██║    ██╔════╝██╔════╝██╔═══██╗██╔══██╗██╔════╝");
+            Console.WriteLine("           ██║     ██║   ██║██║ █╗ ██║    ███████╗██║     ██║   ██║██████╔╝█████╗  ");
+            Console.WriteLine("           ██║     ██║   ██║██║███╗██║    ╚════██║██║     ██║   ██║██╔══██╗██╔══╝  ");
+            Console.WriteLine("           ███████╗╚██████╔╝╚███╔███╔╝    ███████║╚██████╗╚██████╔╝██║  ██║███████╗");
+            Console.WriteLine("           ╚══════╝ ╚═════╝  ╚══╝╚══╝     ╚══════╝ ╚═════╝ ╚═════╝ ╚═╝  ╚═╝╚══════╝");
+            Console.SetCursorPosition(0, 14);
+            foreach (var student in students)
+            {
+                if (student._theoreticalScore < 5 || student._practiceScore < 5)
+                {
+                    Console.WriteLine("  ╔══════════════════════════════════════════════════════════════════════════════════════════════════════════════════╗");
+                    Console.WriteLine($"  ║  ID: {student._id,-5}║   Name: {student._name,-20}║   TheoreticalScore: {student._theoreticalScore,-5}║   PracticeScore: {student._practiceScore,-5}║   MediumScore: {student._mediumScore,-5}║");
+                    Console.WriteLine("  ╚══════════════════════════════════════════════════════════════════════════════════════════════════════════════════╝");
+                }
+                Console.ReadKey();
+            }
+        }
         public float GPA(float practiceScore, float theoreticalScore)
         {
             return (practiceScore + theoreticalScore) / 2;
@@ -316,18 +338,20 @@ namespace HuyNgu
             Console.WriteLine("                                       ║ 3. DELETE STUDENT INFORMATION    ║");
             Console.WriteLine("                                       ╠══════════════════════════════════╣");
             Console.WriteLine("                                       ║ 4. DISPLAY STUDENTS INFORMATION  ║");
+            Console.WriteLine("                                       ╠══════════════════════════════════╣");
+            Console.WriteLine("                                       ║ 5. LOW SCORE                     ║");
             Console.WriteLine("                                       ╚══════════════════════════════════╝");
             Console.WriteLine("                                       ╔══════════════════════════════════╗");
             Console.WriteLine("                                       ║ YOU CHOOSE:                      ║");
             Console.WriteLine("                                       ╚══════════════════════════════════╝");
-            Console.SetCursorPosition(52, 24);
+            Console.SetCursorPosition(52, 26);
             try
             {
                 chose = float.Parse(Console.ReadLine());
             }
             catch
             {
-                ErrorEndWithTimeout("Invalid information", 44, 26, 1500);
+                ErrorEndWithTimeout("Invalid information", 44, 28, 1500);
             }
             switch (chose)
             {
@@ -336,18 +360,22 @@ namespace HuyNgu
                     break;
                 case 2:
                     if (students.Count > 0) EditStudent();
-                    else ErrorEndWithTimeout("No students in the list", 44, 26, 1500);
+                    else ErrorEndWithTimeout("No students in the list", 44, 29, 1500);
                     break;
                 case 3:
                     if (students.Count > 0) DeleteStudent();
-                    else ErrorEndWithTimeout("No students in the list", 44, 26, 1500);
+                    else ErrorEndWithTimeout("No students in the list", 44, 29, 1500);
                     break;
                 case 4:
                     if (students.Count > 0) DisplayStudents();
-                    else ErrorEndWithTimeout("No students in the list", 44, 26, 1500);
+                    else ErrorEndWithTimeout("No students in the list", 44, 2, 1500);
+                    break;
+                case 5:
+                    if (students.Count > 0) DisplayStudents();
+                    else ErrorEndWithTimeout("Invalid information", 44, 29, 1500);
                     break;
                 default:
-                    ErrorEndWithTimeout("Invalid information", 44, 26, 1500);
+                    ErrorEndWithTimeout("Invalid information", 44, 29, 1500);
                     break;
             }
         }
