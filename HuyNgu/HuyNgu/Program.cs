@@ -190,8 +190,8 @@ namespace HuyNgu
                     Console.WriteLine($"  ║  ID: {student._id,-5}║   Name: {student._name,-20}║   TheoreticalScore: {student._theoreticalScore,-5}║   PracticeScore: {student._practiceScore,-5}║   MediumScore: {student._mediumScore,-5}║");
                     Console.WriteLine("  ╚══════════════════════════════════════════════════════════════════════════════════════════════════════════════════╝");
                 }
-                Console.ReadKey();
             }
+            Console.ReadKey();
         }
         public float GPA(float practiceScore, float theoreticalScore)
         {
@@ -251,7 +251,7 @@ namespace HuyNgu
                             catch
                             {
                                 ErrorEndWithTimeout("Invalid information", 35, 25, 1500);
-                                return;
+                                MainMenu();
                             }
 
                             Console.SetCursorPosition(58, 23);
@@ -262,7 +262,7 @@ namespace HuyNgu
                             catch
                             {
                                 ErrorEndWithTimeout("Invalid information", 35, 25, 1500);
-                                return;
+                                MainMenu();
                             }
 
                             if (practiceScore >= 0 && theoreticalScore >= 0 && theoreticalScore <= 10 && practiceScore <= 10)
@@ -273,20 +273,20 @@ namespace HuyNgu
                             else
                             {
                                 ErrorEndWithTimeout("Invalid score", 35, 25, 1500);
-                                return;
+                                MainMenu();
                             }
                         } while (!done);
                         currentNode.Value._name = name;
                         currentNode.Value._practiceScore = practiceScore;
                         currentNode.Value._theoreticalScore = theoreticalScore;
                         currentNode.Value._mediumScore = mediumScore;
-                        SuccessEndWithTimeout("Successful student information has been repaired", 26, 6, 1500);
-                        return;
+                        SuccessEndWithTimeout("Successful student information has been repaired", 35, 25, 1500);
+                        MainMenu();
                     }
                     currentNode = currentNode.Next;
                 }
                 ErrorEndWithTimeout("Can't find students with ID imported", 26, 17, 1500);
-                return;
+                MainMenu();
             } while (!done);
         }
 
