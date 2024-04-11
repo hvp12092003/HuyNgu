@@ -187,7 +187,7 @@ namespace HuyNgu
                 if (student._theoreticalScore < 5 || student._practiceScore < 5)
                 {
                     Console.WriteLine("  ╔══════════════════════════════════════════════════════════════════════════════════════════════════════════════════╗");
-                Console.WriteLine($"  ║ ID: {student._id,-10}║  Name: {student._name,-20}║  TheoreticalScore: {student._theoreticalScore,-5}║  PracticeScore: {student._practiceScore,-5}║  MediumScore: {student._mediumScore,-5}║");
+                    Console.WriteLine($"  ║ ID: {student._id,-10}║  Name: {student._name,-20}║  TheoreticalScore: {student._theoreticalScore,-5}║  PracticeScore: {student._practiceScore,-5}║  MediumScore: {student._mediumScore,-5}║");
                     Console.WriteLine("  ╚══════════════════════════════════════════════════════════════════════════════════════════════════════════════════╝");
                 }
             }
@@ -371,7 +371,7 @@ namespace HuyNgu
                     else ErrorEndWithTimeout("No students in the list", 44, 2, 1500);
                     break;
                 case 5:
-                    if (students.Count > 0) DisplayStudents();
+                    if (students.Count > 0) ShowLowScore();
                     else ErrorEndWithTimeout("Invalid information", 44, 29, 1500);
                     break;
                 default:
