@@ -41,7 +41,7 @@ namespace HuyNgu
             foreach (var student in students)
             {
                 Console.WriteLine("  ╔══════════════════════════════════════════════════════════════════════════════════════════════════════════════════╗");
-                Console.WriteLine($"  ║  ID: {student._id,-5}║   Name: {student._name,-20}║   TheoreticalScore: {student._theoreticalScore,-5}║   PracticeScore: {student._practiceScore,-5}║   MediumScore: {student._mediumScore,-5}║");
+                Console.WriteLine($"  ║ ID: {student._id,-10}║  Name: {student._name,-20}║  TheoreticalScore: {student._theoreticalScore,-5}║  PracticeScore: {student._practiceScore,-5}║  MediumScore: {student._mediumScore,-5}║");
                 Console.WriteLine("  ╚══════════════════════════════════════════════════════════════════════════════════════════════════════════════════╝");
             }
             Console.ReadKey();
@@ -187,7 +187,7 @@ namespace HuyNgu
                 if (student._theoreticalScore < 5 || student._practiceScore < 5)
                 {
                     Console.WriteLine("  ╔══════════════════════════════════════════════════════════════════════════════════════════════════════════════════╗");
-                    Console.WriteLine($"  ║  ID: {student._id,-5}║   Name: {student._name,-20}║   TheoreticalScore: {student._theoreticalScore,-5}║   PracticeScore: {student._practiceScore,-5}║   MediumScore: {student._mediumScore,-5}║");
+                Console.WriteLine($"  ║ ID: {student._id,-10}║  Name: {student._name,-20}║  TheoreticalScore: {student._theoreticalScore,-5}║  PracticeScore: {student._practiceScore,-5}║  MediumScore: {student._mediumScore,-5}║");
                     Console.WriteLine("  ╚══════════════════════════════════════════════════════════════════════════════════════════════════════════════════╝");
                 }
             }
